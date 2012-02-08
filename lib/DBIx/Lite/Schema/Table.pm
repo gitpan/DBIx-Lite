@@ -1,6 +1,6 @@
 package DBIx::Lite::Schema::Table;
 {
-  $DBIx::Lite::Schema::Table::VERSION = '0.11';
+  $DBIx::Lite::Schema::Table::VERSION = '0.12';
 }
 use strict;
 use warnings;
@@ -121,7 +121,7 @@ DBIx::Lite::Schema::Table
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 OVERVIEW
 
@@ -133,8 +133,6 @@ This class is not supposed to be instantiated manually. You usually get your
 Table objects by calling the C<table()> method on a L<DBIx::Lite::Schema> object:
 
     my $table = $dbix->schema->table('books');
-
-=head1 METHODS
 
 =head2 pk
 

@@ -29,7 +29,7 @@ my %WriteMakefileArgs = (
     "List::MoreUtils" => 0,
     "SQL::Abstract::More" => 0
   },
-  "VERSION" => "0.11",
+  "VERSION" => "0.12",
   "test" => {
     "TESTS" => "t/*.t"
   }

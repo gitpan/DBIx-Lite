@@ -3,8 +3,14 @@ Changes from 2011-02-08 00:00:00 +0000 to present.
 ==================================================
 
 -----------------------------------------
-version 0.11 at 2012-02-08 11:11:06 +0000
+version 0.11 at 2012-02-08 15:22:03 +0000
 -----------------------------------------
+
+  Change: 8fe3915d2943874ca4de26bddf684a3db05ef988
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-02-08 16:22:03 +0000
+
+    Minor POD fixes 
 
   Change: 4efd23664223d90f2dcacfa0bf3a800357d8d4cf
   Author: Alessandro Ranellucci <aar@cpan.org>

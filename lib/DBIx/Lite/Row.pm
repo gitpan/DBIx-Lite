@@ -1,6 +1,6 @@
 package DBIx::Lite::Row;
 {
-  $DBIx::Lite::Row::VERSION = '0.11';
+  $DBIx::Lite::Row::VERSION = '0.12';
 }
 use strict;
 use warnings;
@@ -128,7 +128,7 @@ DBIx::Lite::Row
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 OVERVIEW
 
@@ -141,8 +141,6 @@ related tables (see docs for L<DBIx::Lite::Schema>).
 
     my $book = $dbix->table('books')->find({ id => 10 });
     print $book->title;
-
-=head1 METHODS
 
 =head2 hashref
 

@@ -1,6 +1,6 @@
 package DBIx::Lite::Schema;
 {
-  $DBIx::Lite::Schema::VERSION = '0.11';
+  $DBIx::Lite::Schema::VERSION = '0.12';
 }
 use strict;
 use warnings;
@@ -67,7 +67,7 @@ DBIx::Lite::Schema
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 OVERVIEW
 
@@ -82,8 +82,6 @@ Schema object and reutilize it across multiple connections:
     my $schema = DBIx::Lite::Schema->new;
     my $conn1 = DBIx::Lite->new(schema => $schema)->connect(...);
     my $conn2 = DBIx::Lite->new(schema => $schema)->connect(...);
-
-=head1 METHODS
 
 =head2 new
 
@@ -111,7 +109,7 @@ This will have the following effects:
 
 =item provide a C<books> accessor method in the authors ResultSet objects
 
-=item allow to call C<$author->insert_related('books', {...})>
+=item allow to call C<<$author->insert_related('books', {...})>>
 
 =back
 

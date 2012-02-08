@@ -1,6 +1,6 @@
 package DBIx::Lite::ResultSet;
 {
-  $DBIx::Lite::ResultSet::VERSION = '0.11';
+  $DBIx::Lite::ResultSet::VERSION = '0.12';
 }
 use strict;
 use warnings;
@@ -453,7 +453,7 @@ DBIx::Lite::ResultSet
 
 =head1 VERSION
 
-version 0.11
+version 0.12
 
 =head1 OVERVIEW
 
@@ -469,7 +469,7 @@ and then you can chain methods on it to build your query:
         ->search({ year => { '<' => 1920 } })
         ->order_by('year');
 
-=head1 METHODS
+=head1 BUILDING THE QUERY
 
 =head2 search
 
@@ -491,6 +491,11 @@ allow for further method chaining.
 
     my $rs = $books_rs->select('title', 'year');
 
+If you want to rename a column, pass it as an arrayref:
+
+    my $rs = $books_rs->select(['title' => 'book_title'], 'year');
+    # SELECT title AS book_title, year FROM books ...
+
 =head2 select_also
 
 This method works like L<select> but it adds the passed columns to the ones already
@@ -506,7 +511,7 @@ This method accepts a list of columns for sorting. It returns a L<DBIx::Lite::Re
 object to allow for further method chaining.
 Columns can be prefixed with C<+> or C<-> to indicate sorting direction (C<+> is C<ASC>,
 C<-> is C<DESC>) or they can be expressed using the L<SQL::Abstract> syntax
-(C<{-asc => $column_name}>).
+(C<<{-asc => $column_name}>>).
 
     my $rs = $books_rs->order_by('year');
     my $rs = $books_rs->order_by('+genre', '-year');
@@ -567,6 +572,8 @@ condition maps I<my> C<author_id> column to I<their> C<id> column.
 This method works like L<inner join> except it applies a C<LEFT JOIN> instead of an
 C<INNER JOIN>.
 
+=head1 RETRIEVING RESULTS
+
 =head2 all
 
 This method will execute the C<SELECT> query and will return a list of 
@@ -624,6 +631,8 @@ retrieve that column only and it will return a list with the values.
 
     my @book_titles = $books_rs->get_column('title');
 
+=head1 MANIPULATING ROWS
+
 =head2 insert
 
 This method accepts a hashref with column values to pass to the C<INSERT> SQL command.
@@ -639,7 +648,7 @@ populate the resulting object accordingly.
 
 This method works like L<insert> but it will perform a L<find> search to check that
 no row already exists for the supplied column values. If a row is found it is returned,
-otherwise a SQL <INSERT> is performed and the inserted row is returned.
+otherwise a SQL C<INSERT> is performed and the inserted row is returned.
 
     my $book = $dbix
         ->table('books')
@@ -669,9 +678,9 @@ also works when no C<$dbh> or connection data is supplied to L<DBIx::Lite>.
 
 =head2 select_sth
 
-This methods executes the SQL C<SELECT> statement and returns it.
+This methods prepares the SQL C<SELECT> statement and returns it along with bind values.
 
-    my $sth = $books_rs->select_sth;
+    my ($sth, @bind) = $books_rs->select_sth;
 
 =head2 insert_sql
 
@@ -685,9 +694,9 @@ also works when no C<$dbh> or connection data is supplied to L<DBIx::Lite>.
 
 =head2 insert_sth
 
-This methods executes the SQL C<INSERT> statement and returns it.
+This methods prepares the SQL C<INSERT> statement and returns it along with bind values.
 
-   my $sth = $dbix
+   my ($sth, @bind) = $dbix
         ->table('books')
         ->insert_sth({ name => 'Camel Tales', year => 2012 });
 
@@ -701,9 +710,9 @@ also works when no C<$dbh> or connection data is supplied to L<DBIx::Lite>.
 
 =head2 update_sth
 
-This method executes the SQL C<UPDATE> statement and returns it.
+This method prepares the SQL C<UPDATE> statement and returns it along with bind values.
 
-    my $sth = $books_rs->update_sth({ genre => 'tennis' });
+    my ($sth, @bind) = $books_rs->update_sth({ genre => 'tennis' });
 
 =head2 delete_sql
 
@@ -715,9 +724,11 @@ also works when no C<$dbh> or connection data is supplied to L<DBIx::Lite>.
 
 =head2 delete_sth
 
-This method executes the SQL C<DELETE> statement and returns it.
+This method prepares the SQL C<DELETE> statement and returns it along with bind values.
 
-    my $sth = $books_rs->delete_sth;
+    my ($sth, @bind) = $books_rs->delete_sth;
+
+=head1 PAGING
 
 =head2 page
 
@@ -748,14 +759,6 @@ rows.
     while (my $book = $rs->next) {
         ...
     }
-
-=head1 BUILDING THE QUERY
-
-=head1 RETRIEVING RESULTS
-
-=head1 MANIPULATING ROWS
-
-=head1 PAGING
 
 =head1 AUTHOR
 
