@@ -1,0 +1,39 @@
+==================================================
+Changes from 2011-02-08 00:00:00 +0000 to present.
+==================================================
+
+-----------------------------------------
+version 0.11 at 2012-02-08 11:11:06 +0000
+-----------------------------------------
+
+  Change: 4efd23664223d90f2dcacfa0bf3a800357d8d4cf
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-02-08 12:10:59 +0000
+
+    Added README 
+
+  Change: 60c49d07509be7879b04fdd03baabe04fc84aec5
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-02-08 12:10:21 +0000
+
+    Hints for Pod::Coverage 
+
+-----------------------------------------
+version 0.10 at 2012-02-08 11:03:16 +0000
+-----------------------------------------
+
+  Change: b25fcade07b465eb7e1f007b0d320a23413bebac
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-02-08 12:03:16 +0000
+
+    Added test 
+
+  Change: 752e941225d43380db124d65090020b0330b8142
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-02-08 11:47:10 +0000
+
+    first commit 
+
+================
+End of releases.
+================

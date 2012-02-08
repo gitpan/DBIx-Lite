@@ -1,0 +1,15 @@
+CHANGES
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+README
+lib/DBIx/Lite.pm
+lib/DBIx/Lite/ResultSet.pm
+lib/DBIx/Lite/Row.pm
+lib/DBIx/Lite/Schema.pm
+lib/DBIx/Lite/Schema/Table.pm
+t/00-compile.t
+t/release-pod-coverage.t
+t/release-pod-syntax.t
+t/sqlite.t
