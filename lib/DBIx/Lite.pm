@@ -1,16 +1,19 @@
 package DBIx::Lite;
 {
-  $DBIx::Lite::VERSION = '0.12';
+  $DBIx::Lite::VERSION = '0.13';
 }
 # ABSTRACT: Chained and minimal ORM
 use strict;
 use warnings;
 
+use Carp qw(croak);
 use DBIx::Connector;
 use DBIx::Lite::ResultSet;
 use DBIx::Lite::Row;
 use DBIx::Lite::Schema;
 use SQL::Abstract::More;
+
+$Carp::Internal{$_}++ for __PACKAGE__, qw(DBIx::Connector);
 
 sub new {
     my $class = shift;
@@ -18,7 +21,10 @@ sub new {
     
     my $self = {
         schema      => delete $params{schema} || DBIx::Lite::Schema->new,
-        abstract    => SQL::Abstract::More->new,
+        abstract    => SQL::Abstract::More->new(
+            column_alias => '%s AS `%s`',
+            %{ delete $params{abstract} || {} },
+        ),
         connector   => delete $params{connector},
         dbh         => delete $params{dbh},
     };
@@ -39,6 +45,7 @@ sub connect {
     
     $self->{connector} = DBIx::Connector->new(@_);
     $self->{dbh} = undef;
+    $self->dbh->{HandleError} = sub { croak $_[0] };
     
     $self;
 }
@@ -136,7 +143,7 @@ DBIx::Lite - Chained and minimal ORM
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 SYNOPSIS
 
@@ -259,6 +266,15 @@ This argument allows you to supply a pre-made L<DBIx::Lite::Schema> object. If n
 provided, a new empty one will be created for each DBIx::Lite object. This argument is
 useful if you want to prepare your schema in advance and reutilize it across multiple
 connections.
+
+=item I<abstract>
+
+This argument allows you to supply options for L<SQL::Abstract::More> module. Here is 
+example for MySQL DB backend to quote fields names with backtick to allow using reserved
+words as column's names.
+
+    my $db = DBIx::Lite->new( abstract => { quote_char => '`', name_sep => '.' } );
+    $db->connect("DBI:mysql:$db_dbname;host=$db_host", $db_username, $db_password); 
 
 =back
 

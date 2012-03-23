@@ -23,13 +23,14 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "DBIx::Lite",
   "PREREQ_PM" => {
+    "Carp" => 0,
     "Clone" => 0,
     "DBIx::Connector" => 0,
     "Data::Page" => 0,
     "List::MoreUtils" => 0,
     "SQL::Abstract::More" => 0
   },
-  "VERSION" => "0.12",
+  "VERSION" => "0.13",
   "test" => {
     "TESTS" => "t/*.t"
   }

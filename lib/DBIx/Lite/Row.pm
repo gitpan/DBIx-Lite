@@ -1,12 +1,13 @@
 package DBIx::Lite::Row;
 {
-  $DBIx::Lite::Row::VERSION = '0.12';
+  $DBIx::Lite::Row::VERSION = '0.13';
 }
 use strict;
 use warnings;
 
 use Clone qw(clone);
 use vars qw($AUTOLOAD);
+$Carp::Internal{$_}++ for __PACKAGE__;
 
 sub _new {
     my $class = shift;
@@ -128,7 +129,7 @@ DBIx::Lite::Row
 
 =head1 VERSION
 
-version 0.12
+version 0.13
 
 =head1 OVERVIEW
 

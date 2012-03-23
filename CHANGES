@@ -1,9 +1,92 @@
 ==================================================
-Changes from 2011-02-08 00:00:00 +0000 to present.
+Changes from 2011-03-24 00:00:00 +0000 to present.
 ==================================================
 
 -----------------------------------------
-version 0.11 at 2012-02-08 15:22:03 +0000
+version 0.13 at 2012-03-23 11:12:53 +0000
+-----------------------------------------
+
+  Change: 795dd041bb2ad007b11626ed66b288398545a8f0
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-23 12:12:13 +0000
+
+    Use Carp to throw useful stack traces 
+
+  Change: 34606219fad8c3f36a2b8f61a6d74edbe5ef62c0
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-23 11:12:33 +0000
+
+    Various bugfixes related to table name escaping and paging. New
+    prevent_duplicates option 
+
+  Change: b9ed0c7fffa84a4ef9488c3e36005881ba8979c2
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-05 10:10:16 +0000
+
+    Remove non needed Makefile.PL pulled with contributions 
+
+  Change: eb50c9f136f4b0aa2977d7f98859931282122321
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-05 10:10:01 +0000
+
+    Merge branch 'master' of github.com:alexrj/DBIx-Lite
+
+    Conflicts:
+
+    README.pod 
+
+  Change: 48740c5d3e803c3526ac9119748260b6038b927a
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-05 10:04:10 +0000
+
+    Updates to POD and dist.ini 
+
+  Change: e168ec5204a25aaad5dc15886ef052419dd2f682
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-05 01:03:01 +0000
+
+    Merge pull request #1 from hippich/master
+
+    few smaller changes 
+
+  Change: 947a5f583c84af02b5df647bd8ef0c9086911544
+  Author: Pavel Karoukin <pavel@karoukin.us>
+  Date : 2012-03-04 20:56:36 +0000
+
+    Update documentation in README.pod 
+
+  Change: ded5955ab970881d25b510ae196a51e3d2165eaa
+  Author: Pavel Karoukin <pavel@karoukin.us>
+  Date : 2012-03-04 20:55:48 +0000
+
+    Update documentation in README.pod 
+
+  Change: 856366a9ee67f86c586b8bd7f0ab2a4f3a0c631f
+  Author: Pavel Karoukin <pavel@karoukin.us>
+  Date : 2012-03-04 20:44:39 +0000
+
+    Add test for SQL::Abstract::More settings passing. 
+
+  Change: acb8db1bb40755a7b2d85a681b7b3070cda2addd
+  Author: Pavel Karoukin <pavel@karoukin.us>
+  Date : 2012-03-04 20:44:21 +0000
+
+    Fix count() to work around quoting COUNT(*) 
+
+  Change: 98f73919bd8c3958051de8008f2da4d37c42bfb1
+  Author: Pavel Karoukin <pavel@karoukin.us>
+  Date : 2012-03-04 20:05:07 +0000
+
+    Add settings option for SQL::Abstract::More object. 
+
+  Change: b9d2a2ebc63b8af1ecf2712108f230856c8da24b
+  Author: Pavel Karoukin <pavel@karoukin.us>
+  Date : 2012-03-04 17:56:52 +0000
+
+    Add Makefile.PL from cpan distribution. 
+
+-----------------------------------------
+version 0.12 at 2012-02-08 15:22:03 +0000
 -----------------------------------------
 
   Change: 8fe3915d2943874ca4de26bddf684a3db05ef988
