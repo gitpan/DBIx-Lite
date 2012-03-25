@@ -1,11 +1,13 @@
 package DBIx::Lite::Schema;
 {
-  $DBIx::Lite::Schema::VERSION = '0.13';
+  $DBIx::Lite::Schema::VERSION = '0.14';
 }
 use strict;
 use warnings;
 
+use Carp qw(croak);
 use DBIx::Lite::Schema::Table;
+$Carp::Internal{$_}++ for __PACKAGE__;
 
 sub new {
     my $class = shift;
@@ -23,7 +25,7 @@ sub new {
     }
     
     !%params
-        or die "Unknown options: " . join(', ', keys %params) . "\n";
+        or croak "Unknown options: " . join(', ', keys %params);
     
     bless $self, $class;
     $self;
@@ -41,12 +43,12 @@ sub one_to_many {
     my ($from, $to, $their_accessor) = @_;
     
     $from && $from =~ /^(.+)\.(.+)$/
-        or die "Relationship keys must be defined in table.column format\n";
+        or croak "Relationship keys must be defined in table.column format";
     my $from_table = $self->table($1);
     my $from_key = $2;
     
     $to && $to =~ /^(.+)\.(.+)$/
-        or die "Relationship keys must be defined in table.column format\n";
+        or croak "Relationship keys must be defined in table.column format";
     my $to_table = $self->table($1);
     my $to_key = $2;
     
@@ -67,7 +69,7 @@ DBIx::Lite::Schema
 
 =head1 VERSION
 
-version 0.13
+version 0.14
 
 =head1 OVERVIEW
 

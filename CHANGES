@@ -1,9 +1,38 @@
 ==================================================
-Changes from 2011-03-24 00:00:00 +0000 to present.
+Changes from 2011-03-26 00:00:00 +0000 to present.
 ==================================================
 
 -----------------------------------------
-version 0.13 at 2012-03-23 11:12:53 +0000
+version 0.14 at 2012-03-25 13:53:08 +0000
+-----------------------------------------
+
+  Change: 4e6e5aeaf9261821c945265030a05593518a1cc7
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-25 15:52:43 +0000
+
+    New ->single_value method 
+
+  Change: f4756e536faaed824c346d1616680d090fb10d8a
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-24 22:24:00 +0000
+
+    Bugfix: infinite loop when calling ->delete on a Row object 
+
+  Change: 184eb37babede9c2f98638bca7407dba3b8d45aa
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-24 17:17:37 +0000
+
+    Bugfix: unmeaningful error was thrown when an unavailable method was
+    called on Row objects 
+
+  Change: 73b2844382111c92a38c201754894cf141350422
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-24 17:11:26 +0000
+
+    Use croak everywhere 
+
+-----------------------------------------
+version 0.13 at 2012-03-23 11:12:13 +0000
 -----------------------------------------
 
   Change: 795dd041bb2ad007b11626ed66b288398545a8f0
