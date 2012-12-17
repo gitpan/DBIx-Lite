@@ -24,4 +24,4 @@ requires:
 resources:
   bugtracker: https://github.com/alexrj/DBIx-Lite/issues
   repository: git://github.com/alexrj/DBIx-Lite.git
-version: 0.14
+version: 0.15

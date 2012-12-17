@@ -1,6 +1,6 @@
 package DBIx::Lite::ResultSet;
 {
-  $DBIx::Lite::ResultSet::VERSION = '0.14';
+  $DBIx::Lite::ResultSet::VERSION = '0.15';
 }
 use strict;
 use warnings;
@@ -113,7 +113,7 @@ sub select_sql {
     # column names
     my @cols = ();
     my $have_scalar_ref = 0;
-    my $cur_table_prefix = $self->_table_prefix($self->{cur_table}{name});
+    my $cur_table_prefix = $self->_table_prefix($self->{cur_table}{name}, 'select');
     foreach my $col (grep defined $_, @{$self->{select}}) {
         my ($expr, $as) = ref $col eq 'ARRAY' ? @$col : ($col, undef);
         $expr =~ s/^[^.]+$/$cur_table_prefix\.$&/ if !ref($expr);
@@ -137,7 +137,7 @@ sub select_sql {
     foreach my $join (@{$self->{joins}}) {
         my ($table_name, $table_alias) = @{$join->[2]};
         my %cond = ();
-        my $left_table_prefix = $self->_table_prefix($join->[1]{name});
+        my $left_table_prefix = $self->_table_prefix($join->[1]{name}, 'select');
         while (my ($col1, $col2) = each %{$join->[3]}) {
             $col1 =~ s/^[^.]+$/$left_table_prefix\.$&/;
             $col2 = ($table_alias || $quote->($table_name)) . ".$col2"
@@ -234,7 +234,7 @@ sub update_sql {
         @pk == 1
             or croak "Update across relationships is not allowed with multi-column primary keys";
         
-        my $fq_pk = $self->_table_prefix($self->{cur_table}{name}) . "." . $pk[0];
+        my $fq_pk = $self->_table_prefix($self->{cur_table}{name}, 'update') . "." . $pk[0];
         $update_where = {
             $fq_pk => {
                 -in => \[ $self->select($pk[0])->select_sql ],
@@ -243,7 +243,7 @@ sub update_sql {
     }
     
     return $self->{dbix_lite}->{abstract}->update(
-        $self->{dbix_lite}->{abstract}->table_alias($self->{cur_table}{name}, $self->_table_prefix($self->{cur_table}{name})),
+        $self->_table_alias($self->{cur_table}{name}, $self->_table_prefix($self->{cur_table}{name}, 'update')),
         $update_cols, $update_where,
     );
 }
@@ -295,7 +295,7 @@ sub delete_sql {
         @pk == 1
             or croak "Delete across relationships is not allowed with multi-column primary keys";
         
-        my $fq_pk = $self->_table_prefix($self->{cur_table}{name}) . "." . $pk[0];
+        my $fq_pk = $self->_table_prefix($self->{cur_table}{name}, 'delete') . "." . $pk[0];
         $delete_where = {
             $fq_pk => {
                 -in => \[ $self->select($pk[0])->select_sql ],
@@ -428,8 +428,19 @@ sub _join {
 
 sub _table_prefix {
     my $self = shift;
-    my ($table_name) = @_;
-    return ($table_name eq $self->{table}{name}) ? 'me' : $table_name;
+    my ($table_name, $op) = @_;
+    return ($op eq 'select' && $table_name eq $self->{table}{name}) ? 'me' : $table_name;
+}
+
+sub _table_alias {
+    my $self = shift;
+    my ($table_name, $table_alias) = @_;
+    
+    if ($table_name eq $table_alias) {
+        return $table_name;
+    } else {
+        return $self->{dbix_lite}->{abstract}->table_alias($table_name, $table_alias);
+    }
 }
 
 sub _inflate_row {
@@ -474,7 +485,7 @@ DBIx::Lite::ResultSet
 
 =head1 VERSION
 
-version 0.14
+version 0.15
 
 =head1 OVERVIEW
 

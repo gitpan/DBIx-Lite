@@ -1,9 +1,26 @@
 ==================================================
-Changes from 2011-03-26 00:00:00 +0000 to present.
+Changes from 2011-12-18 00:00:00 +0000 to present.
 ==================================================
 
 -----------------------------------------
-version 0.14 at 2012-03-25 13:53:08 +0000
+version 0.15 at 2012-12-17 12:43:44 +0000
+-----------------------------------------
+
+  Change: 615de0f7cd9c190a25fc05ce28228246bf9b3cf9
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-12-17 13:42:29 +0000
+
+    Bugfix: don't use the 'AS' syntax for table names in UPDATE becaue
+    SQLite doesn't support it. #2 
+
+  Change: c41cb8f2822f1f5df1b300112953e806f03b81d4
+  Author: Alessandro Ranellucci <aar@cpan.org>
+  Date : 2012-03-25 15:58:15 +0000
+
+    Removing NextRelease DZ plugin 
+
+-----------------------------------------
+version 0.14 at 2012-03-25 13:52:43 +0000
 -----------------------------------------
 
   Change: 4e6e5aeaf9261821c945265030a05593518a1cc7
