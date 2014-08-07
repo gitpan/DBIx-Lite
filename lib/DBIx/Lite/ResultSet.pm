@@ -1,6 +1,6 @@
 package DBIx::Lite::ResultSet;
 {
-  $DBIx::Lite::ResultSet::VERSION = '0.15';
+  $DBIx::Lite::ResultSet::VERSION = '0.16';
 }
 use strict;
 use warnings;
@@ -8,7 +8,7 @@ use warnings;
 use Carp qw(croak);
 use Clone qw(clone);
 use Data::Page;
-use List::MoreUtils qw(uniq);
+use List::MoreUtils qw(uniq firstval);
 use vars qw($AUTOLOAD);
 $Carp::Internal{$_}++ for __PACKAGE__;
 
@@ -126,7 +126,7 @@ sub select_sql {
     
     # always retrieve our primary key if provided and no col name is a scalar ref
     if (!$have_scalar_ref && (my @pk = $self->{cur_table}->pk)) {
-        if (not "$cur_table_prefix.*" ~~ @cols) {
+        if (not firstval { "$cur_table_prefix.*" eq $_ } @cols) {
             $_ =~ s/^[^.]+$/$cur_table_prefix\.$&/ for @pk;
             unshift @cols, @pk;
         }
@@ -262,12 +262,12 @@ sub update {
     my $update_cols = shift;
     ref $update_cols eq 'HASH' or croak "update() requires a hashref";
     
-    my $res;
+    my $affected_rows;
     $self->{dbix_lite}->dbh_do(sub {
         my ($sth, @bind) = $self->update_sth($update_cols);
-        $res = $sth->execute(@bind);
+        $affected_rows = $sth->execute(@bind);
     });
-    return $res;
+    return $affected_rows;
 }
 
 sub find_or_insert {
@@ -319,10 +319,12 @@ sub delete_sth {
 sub delete {
     my $self = shift;
     
+    my $affected_rows;
     $self->{dbix_lite}->dbh_do(sub {
         my ($sth, @bind) = $self->delete_sth;
-        $sth->execute(@bind);
+        $affected_rows = $sth->execute(@bind);
     });
+    return $affected_rows;
 }
 
 sub single {
@@ -384,6 +386,18 @@ sub count {
         $count = +($sth->fetchrow_array)[0];
     });
     return $count;
+}
+
+sub column_names {
+    my $self = shift;
+
+    $self->{dbix_lite}->dbh_do(sub {
+        ($self->{sth}, my @bind) = $self->select_sth;
+        $self->{sth}->execute(@bind);
+    }) if !$self->{sth};
+
+    my $c = $self->{sth}->{NAME};
+    return wantarray ? @$c : $c;
 }
 
 sub get_column {
@@ -485,7 +499,7 @@ DBIx::Lite::ResultSet
 
 =head1 VERSION
 
-version 0.15
+version 0.16
 
 =head1 OVERVIEW
 
@@ -662,6 +676,14 @@ The following syntax will always retrieve just the first row in an endless loop:
         ...
     }
 
+=head2 column_names
+
+This method returns a list of column names.
+It returns array on list context and array reference on scalar context.
+
+    my @book_columns = $books_rs->column_names;
+    my $book_columns = $books_rs->column_names; # array reference
+
 =head2 get_column
 
 This method accepts a column name to fetch. It will execute a C<SELECT> query to
@@ -702,6 +724,7 @@ otherwise a SQL C<INSERT> is performed and the inserted row is returned.
 =head2 update
 
 This method accepts a hashref with column values to pass to the C<UPDATE> SQL command.
+It returns the number of affected rows.
 
     $dbix->table('books')
         ->search({ year => { '<' => 1920 } })
@@ -709,7 +732,7 @@ This method accepts a hashref with column values to pass to the C<UPDATE> SQL co
 
 =head2 delete
 
-This method performs a C<DELETE> SQL command.
+This method performs a C<DELETE> SQL command. It returns the number of affected rows.
 
     $books_rs->delete;
 
@@ -811,7 +834,7 @@ Alessandro Ranellucci <aar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Alessandro Ranellucci.
+This software is copyright (c) 2014 by Alessandro Ranellucci.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

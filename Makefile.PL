@@ -25,12 +25,13 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Carp" => 0,
     "Clone" => 0,
+    "DBI" => "1.38",
     "DBIx::Connector" => 0,
     "Data::Page" => 0,
     "List::MoreUtils" => 0,
     "SQL::Abstract::More" => 0
   },
-  "VERSION" => "0.15",
+  "VERSION" => "0.16",
   "test" => {
     "TESTS" => "t/*.t"
   }

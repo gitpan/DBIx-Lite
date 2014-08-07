@@ -1,174 +1,60 @@
 ==================================================
-Changes from 2011-12-18 00:00:00 +0000 to present.
+Changes from 2013-08-07 00:00:00 +0000 to present.
 ==================================================
 
 -----------------------------------------
-version 0.15 at 2012-12-17 12:43:44 +0000
+version 0.16 at 2014-08-07 15:20:35 +0000
 -----------------------------------------
 
-  Change: 615de0f7cd9c190a25fc05ce28228246bf9b3cf9
+  Change: 11cb2a8d11f12c893055749deb13675fa4a628cd
   Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-12-17 13:42:29 +0000
+  Date : 2014-08-07 17:18:39 +0000
 
-    Bugfix: don't use the 'AS' syntax for table names in UPDATE becaue
-    SQLite doesn't support it. #2 
+    Return number of affected rows after update() and delete(). #7 
 
-  Change: c41cb8f2822f1f5df1b300112953e806f03b81d4
+  Change: 89d6b70c68e4be9175a44e71c02431c3a369edfd
   Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-25 15:58:15 +0000
+  Date : 2014-08-07 17:07:26 +0000
 
-    Removing NextRelease DZ plugin 
+    Remove smart match operator. #5 
 
------------------------------------------
-version 0.14 at 2012-03-25 13:52:43 +0000
------------------------------------------
-
-  Change: 4e6e5aeaf9261821c945265030a05593518a1cc7
+  Change: 0ccc177842ef29f377d095f94bfe4cae3226b5d3
   Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-25 15:52:43 +0000
+  Date : 2014-08-07 17:05:26 +0000
 
-    New ->single_value method 
+    Merge pull request #4 from keedi/feature/last-insert-id-support-pg
 
-  Change: f4756e536faaed824c346d1616680d090fb10d8a
+    Feature/last insert id support pg 
+
+  Change: f229007be7bbf151a4df5ab3ac9cbf6ec5f6a1b1
+  Author: Keedi Kim <keedi.k@gmail.com>
+  Date : 2013-02-27 11:12:18 +0000
+
+    Specify minimum version of DBI for last_insert_id
+
+    DBI 1.38 is required at least to use last_insert_id
+    https://metacpan.org/module/DBI#last_insert_id 
+
+  Change: 53c2259db1ce0c1c2711fe6e2feb1deab45d4b3b
+  Author: Keedi Kim <keedi.k@gmail.com>
+  Date : 2013-02-27 11:11:50 +0000
+
+    Support last insert id for Pg driver 
+
+  Change: 2e6ff682fa0d45ab7b4cca3e5faf612286e15f75
   Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-24 22:24:00 +0000
+  Date : 2013-01-10 10:31:35 +0000
 
-    Bugfix: infinite loop when calling ->delete on a Row object 
+    Merge pull request #3 from keedi/feature/add-column-names
 
-  Change: 184eb37babede9c2f98638bca7407dba3b8d45aa
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-24 17:17:37 +0000
+    Add column_names() to retrieve column names 
 
-    Bugfix: unmeaningful error was thrown when an unavailable method was
-    called on Row objects 
+  Change: 3efd26263c61eda26fcb3c8d98c8a33e80e4dd6b
+  Author: Keedi Kim <keedi.k@gmail.com>
+  Date : 2013-01-11 02:23:01 +0000
 
-  Change: 73b2844382111c92a38c201754894cf141350422
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-24 17:11:26 +0000
+    Add column_names() to retrieve column names 
 
-    Use croak everywhere 
-
------------------------------------------
-version 0.13 at 2012-03-23 11:12:13 +0000
------------------------------------------
-
-  Change: 795dd041bb2ad007b11626ed66b288398545a8f0
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-23 12:12:13 +0000
-
-    Use Carp to throw useful stack traces 
-
-  Change: 34606219fad8c3f36a2b8f61a6d74edbe5ef62c0
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-23 11:12:33 +0000
-
-    Various bugfixes related to table name escaping and paging. New
-    prevent_duplicates option 
-
-  Change: b9ed0c7fffa84a4ef9488c3e36005881ba8979c2
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-05 10:10:16 +0000
-
-    Remove non needed Makefile.PL pulled with contributions 
-
-  Change: eb50c9f136f4b0aa2977d7f98859931282122321
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-05 10:10:01 +0000
-
-    Merge branch 'master' of github.com:alexrj/DBIx-Lite
-
-    Conflicts:
-
-    README.pod 
-
-  Change: 48740c5d3e803c3526ac9119748260b6038b927a
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-05 10:04:10 +0000
-
-    Updates to POD and dist.ini 
-
-  Change: e168ec5204a25aaad5dc15886ef052419dd2f682
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-03-05 01:03:01 +0000
-
-    Merge pull request #1 from hippich/master
-
-    few smaller changes 
-
-  Change: 947a5f583c84af02b5df647bd8ef0c9086911544
-  Author: Pavel Karoukin <pavel@karoukin.us>
-  Date : 2012-03-04 20:56:36 +0000
-
-    Update documentation in README.pod 
-
-  Change: ded5955ab970881d25b510ae196a51e3d2165eaa
-  Author: Pavel Karoukin <pavel@karoukin.us>
-  Date : 2012-03-04 20:55:48 +0000
-
-    Update documentation in README.pod 
-
-  Change: 856366a9ee67f86c586b8bd7f0ab2a4f3a0c631f
-  Author: Pavel Karoukin <pavel@karoukin.us>
-  Date : 2012-03-04 20:44:39 +0000
-
-    Add test for SQL::Abstract::More settings passing. 
-
-  Change: acb8db1bb40755a7b2d85a681b7b3070cda2addd
-  Author: Pavel Karoukin <pavel@karoukin.us>
-  Date : 2012-03-04 20:44:21 +0000
-
-    Fix count() to work around quoting COUNT(*) 
-
-  Change: 98f73919bd8c3958051de8008f2da4d37c42bfb1
-  Author: Pavel Karoukin <pavel@karoukin.us>
-  Date : 2012-03-04 20:05:07 +0000
-
-    Add settings option for SQL::Abstract::More object. 
-
-  Change: b9d2a2ebc63b8af1ecf2712108f230856c8da24b
-  Author: Pavel Karoukin <pavel@karoukin.us>
-  Date : 2012-03-04 17:56:52 +0000
-
-    Add Makefile.PL from cpan distribution. 
-
------------------------------------------
-version 0.12 at 2012-02-08 15:22:03 +0000
------------------------------------------
-
-  Change: 8fe3915d2943874ca4de26bddf684a3db05ef988
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-02-08 16:22:03 +0000
-
-    Minor POD fixes 
-
-  Change: 4efd23664223d90f2dcacfa0bf3a800357d8d4cf
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-02-08 12:10:59 +0000
-
-    Added README 
-
-  Change: 60c49d07509be7879b04fdd03baabe04fc84aec5
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-02-08 12:10:21 +0000
-
-    Hints for Pod::Coverage 
-
------------------------------------------
-version 0.10 at 2012-02-08 11:03:16 +0000
------------------------------------------
-
-  Change: b25fcade07b465eb7e1f007b0d320a23413bebac
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-02-08 12:03:16 +0000
-
-    Added test 
-
-  Change: 752e941225d43380db124d65090020b0330b8142
-  Author: Alessandro Ranellucci <aar@cpan.org>
-  Date : 2012-02-08 11:47:10 +0000
-
-    first commit 
-
-================
-End of releases.
-================
+================================================
+Plus 6 releases after 2013-08-07 00:00:00 +0000.
+================================================
